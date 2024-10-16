@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     Button button;
-    EditText fieldA, fieldB;
+    EditText fieldA, fieldB, fieldC;
     TextView resultTextView;
 
     @Override
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
         fieldA = findViewById(R.id.field_a);
         fieldB = findViewById(R.id.field_b);
+        fieldC = findViewById(R.id.field_с);
         resultTextView = findViewById(R.id.result_text_view);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -34,10 +35,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String strA = fieldA.getText().toString();
                 String strB = fieldB.getText().toString();
+                String strC = fieldC.getText().toString();
                 try {
                     double a = Double.parseDouble(strA);
                     double b = Double.parseDouble(strB);
-                    resultTextView.setText(a + " + " + b + " = " + (a + b));
+                    double c = Double.parseDouble(strC);
+                    double d = b * b - 4 * a * c;
+                    if (d >= 0){
+                        double x1 = (-b + Math.sqrt(d)) / (2 * a);
+                        double x2 = (-b - Math.sqrt(d)) / (2 * a);
+                        resultTextView.setText("корни: " + x1 + " " + x2);
+                    } else {
+                        resultTextView.setText("Корней нет");
+                    }
                 }catch (Exception e){
                     resultTextView.setText("Введите числа!");
                 }
